@@ -19,10 +19,10 @@ get '/update_ranks' do
   get_keywords().each do | keyword |
 puts keyword
     rank = google.find_rank( keyword, TARGET );
-    result = {"engine"=>"google", "date"=>Time.nowstrftime("%m/%d/%Y"), "keyword"=>keyword, "rank"=>rank}
+    result = {"engine"=>"google", "date"=>Time.now.strftime("%m/%d/%Y"), "keyword"=>keyword, "rank"=>rank}
     coll.insert( result )
     rank = bing.find_rank( keyword, TARGET );
-    results = {"engine"=>"bing", "date"=>Time.nowstrftime("%m/%d/%Y"), "keyword"=>keyword, "rank"=>rank}
+    results = {"engine"=>"bing", "date"=>Time.now.strftime("%m/%d/%Y"), "keyword"=>keyword, "rank"=>rank}
     coll.insert( result )
   end
 end
