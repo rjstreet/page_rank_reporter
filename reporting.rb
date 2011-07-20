@@ -14,12 +14,13 @@ get '/update_ranks' do
   coll = get_stats_collection 
   google = GoogleRankChecker.new
   bing = BingRankChecker.new
-  results = Array.new
   get_keywords().each do | keyword |
     rank = google.find_rank( keyword, TARGET );
-    results << {"engine"=>"google", "date"=>Time.nowstrftime("%m/%d/%Y"), "keyword"=>keyword, "rank"=>rank}
+    result = {"engine"=>"google", "date"=>Time.nowstrftime("%m/%d/%Y"), "keyword"=>keyword, "rank"=>rank}
+    coll.insert( result )
     rank = bing.find_rank( keyword, TARGET );
-    results << {"engine"=>"bing", "date"=>Time.nowstrftime("%m/%d/%Y"), "keyword"=>keyword, "rank"=>rank}
+    results = {"engine"=>"bing", "date"=>Time.nowstrftime("%m/%d/%Y"), "keyword"=>keyword, "rank"=>rank}
+    coll.insert( result )
   end
 end
 
@@ -27,7 +28,7 @@ get '/keywords' do
   keywords = get_keywords()
   output = '<ul>'
   keywords.each {|word| output = output + '<li>' + word }
-  output += '</ul>'
+  output = output + '</ul>'
 end
 
 def get_keywords
