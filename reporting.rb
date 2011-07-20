@@ -4,6 +4,8 @@ require 'googlecharts'
 require 'mongo'
 require 'uri'
 
+TARGET = 'enrichnc.org'
+
 get '/' do
   "Are you supposed to be here?"
 end
@@ -13,6 +15,9 @@ get '/update_ranks' do
   google = GoogleRankChecker.new
   bing = BingRankChecker.new
   results = Array.new
+  get_keywords().each do | keyword |
+    google.find_rank( keyword, TARGET );
+  end
 end
 
 get '/keywords' do
