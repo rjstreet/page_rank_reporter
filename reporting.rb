@@ -16,7 +16,9 @@ end
 
 get '/keywords' do
   keywords = get_keywords()
-  keywords.each {|word| puts word["keyword"] }
+  puts "<ul>"
+  keywords.each {|word| puts"<li>";puts word }
+  puts "</ul>"
 end
 
 def get_keywords
@@ -25,7 +27,7 @@ def get_keywords
   db = conn.db(uri.path.gsub(/^\//, ''))
   coll = db.collection( "keywords" )
   keywords = Array.new
-  coll.distinct('keyword').each {|row| keywords << row}
+  coll.distinct('keyword').each {|row| keywords << row["keyword"]}
   keywords
 end
 
