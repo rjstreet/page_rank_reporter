@@ -5,7 +5,7 @@ require 'hpricot'
 class GoogleRankChecker
   def find_rank( search, search_for_domain )
     page_num = 0
-    max_pages = 20
+    max_pages = 8
     count = 0
     search = URI.escape( search )
     while page_num < max_pages
