@@ -19,7 +19,7 @@ get '/keywords' do
 end
 
 def get_keywords
-  db = Mongo::Connection.new.db("app624994")
+  db = Mongo::Connection.new("staff.mongohq.com", 10054).db("app624994")
   auth = db.authenticate( 'reporter', 'report12max' )
   coll = db.collection( "keywords" )
   keywords = Array.new
