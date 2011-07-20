@@ -1,3 +1,3 @@
-require 'index'
+require 'reporting'
 run Sinatra::Application
 
