@@ -16,7 +16,7 @@ get '/update_ranks' do
   bing = BingRankChecker.new
   results = Array.new
   get_keywords().each do | keyword |
-    google.find_rank( keyword, TARGET );
+    rank - google.find_rank( keyword, TARGET );
   end
 end
 
