@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'open-uri'
 require 'hpricot'
 
 class GoogleRankChecker
@@ -26,5 +25,3 @@ class GoogleRankChecker
     return -1
   end
 end
-
-
