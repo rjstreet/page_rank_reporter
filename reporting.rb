@@ -18,13 +18,15 @@ get '/update_ranks' do
   get_keywords().each do | keyword |
     rank = google.find_rank( keyword, TARGET );
     results["google"][Time.nowstrftime("%m/%d/%Y")] = rank
+    rank = bing.find_rank( keyword, TARGET );
+    results["bing"][Time.nowstrftime("%m/%d/%Y")] = rank
   end
 end
 
 get '/keywords' do
   keywords = get_keywords()
   output = '<ul>'
-  keywords.each {|word| output += '<li>' + word }
+  keywords.each {|word| output = output + '<li>' + word }
   output += '</ul>'
 end
 
