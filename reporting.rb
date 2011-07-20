@@ -21,7 +21,7 @@ get '/update_ranks' do
     result = {"engine"=>"google", "date"=>Time.now.strftime("%m/%d/%Y"), "keyword"=>keyword, "rank"=>rank}
     coll.insert( result )
     rank = bing.find_rank( keyword, TARGET );
-    results = {"engine"=>"bing", "date"=>Time.now.strftime("%m/%d/%Y"), "keyword"=>keyword, "rank"=>rank}
+    result = {"engine"=>"bing", "date"=>Time.now.strftime("%m/%d/%Y"), "keyword"=>keyword, "rank"=>rank}
     coll.insert( result )
   end
   "done"
