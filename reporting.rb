@@ -16,9 +16,9 @@ end
 
 get '/keywords' do
   keywords = get_keywords()
-  puts "<ul>"
-  keywords.each {|word| puts"<li>";puts word }
-  puts "</ul>"
+  str += "<ul>"
+  keywords.each {|word| str += "<li>"" word }
+  str += "</ul>"
 end
 
 def get_keywords
