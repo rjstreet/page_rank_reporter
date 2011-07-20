@@ -4,7 +4,6 @@ require 'hpricot'
 
 class BingRankChecker
   def find_rank( search, search_for_domain )
-puts "Checking Bing!"
     page_num = 0
     max_pages = 8
     count = 0
@@ -15,6 +14,7 @@ puts "Checking Bing!"
       elements = Hpricot.parse( open("http://www.bing.com/search?q=#{search}&go=&qs=n&sk=&first=#{result_num}&FORM=PERE")).search("ul.sb_results li h3 a")
       elements.each do | el |
         host = URI.parse(el.attributes['href']).host rescue next 
+puts host
         if( host != nil ) 
           count += 1
           if(host.include?(search_for_domain) or search_for_domain.include?(host))
