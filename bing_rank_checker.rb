@@ -4,6 +4,7 @@ require 'hpricot'
 
 class BingRankChecker
   def find_rank( search, search_for_domain )
+puts "Checking Bing!"
     page_num = 0
     max_pages = 8
     count = 0
