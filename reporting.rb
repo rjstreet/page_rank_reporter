@@ -16,15 +16,16 @@ get '/update_ranks' do
   bing = BingRankChecker.new
   results = Array.new
   get_keywords().each do | keyword |
-    rank - google.find_rank( keyword, TARGET );
+    rank = google.find_rank( keyword, TARGET );
+    results["google"]["
   end
 end
 
 get '/keywords' do
   keywords = get_keywords()
-  str = '<ul>'
-  keywords.each {|word| str += '<li>' + word }
-  str += '</ul>'
+  output = '<ul>'
+  keywords.each {|word| output += '<li>' + word }
+  output += '</ul>'
 end
 
 def get_keywords
