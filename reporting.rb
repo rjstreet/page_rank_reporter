@@ -25,13 +25,14 @@ def get_keywords
   db = conn.db(uri.path.gsub(/^\//, ''))
   coll = db.collection( "keywords" )
   keywords = Array.new
-  coll.find().each {|row| array.add row[keyword]}
+  coll.find().each {|row| keywords.add row[keyword]}
   keywords
 end
 
 def get_stats_collection
-  db = Mongo::Connection.new.db("app624994")
-  auth = db.authenticate( 'reporter', 'report12max' )
+  uri = URI.parse(ENV['MONGOHQ_URL'])
+  conn = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
+  db = conn.db(uri.path.gsub(/^\//, ''))
   coll = db.collection( "stats" )
   coll
 end
