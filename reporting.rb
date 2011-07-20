@@ -26,7 +26,7 @@ end
 get '/keywords' do
   keywords = get_keywords()
   output = '<ul>'
-  keywords.each {|word| output = output + '<li>' + word }
+  keywords.each {|word| output += '<li>'; output += word }
   output += '</ul>'
 end
 
