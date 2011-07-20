@@ -17,7 +17,6 @@ get '/update_ranks' do
   google = GoogleRankChecker.new
   bing = BingRankChecker.new
   get_keywords().each do | keyword |
-puts keyword
     rank = google.find_rank( keyword, TARGET );
     result = {"engine"=>"google", "date"=>Time.now.strftime("%m/%d/%Y"), "keyword"=>keyword, "rank"=>rank}
     coll.insert( result )
@@ -25,6 +24,7 @@ puts keyword
     results = {"engine"=>"bing", "date"=>Time.now.strftime("%m/%d/%Y"), "keyword"=>keyword, "rank"=>rank}
     coll.insert( result )
   end
+  "done"
 end
 
 get '/keywords' do
