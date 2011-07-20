@@ -12,13 +12,14 @@ get '/update_ranks' do
   coll = get_stats_collection 
   google = GoogleRankChecker.new
   bing = BingRankChecker.new
+
 end
 
 get '/keywords' do
   keywords = get_keywords()
-  str += "<ul>"
-  keywords.each {|word| str += "<li>" + word }
-  str += "</ul>"
+  str += '<ul>'
+  keywords.each {|word| str += '<li>' + word }
+  str += '</ul>'
 end
 
 def get_keywords
