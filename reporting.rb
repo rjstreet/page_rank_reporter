@@ -1,7 +1,5 @@
 require 'rubygems'
 require 'sinatra'
-require 'google_rank_check'
-require 'bing_rank_check'
 require 'googlecharts'
 require 'mongo'
 
