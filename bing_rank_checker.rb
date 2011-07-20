@@ -27,6 +27,4 @@ class BingRankChecker
   end
 end
 
-checker = BingRankChecker.new
-puts checker.find_rank( ARGV[1], ARGV[0] )
 

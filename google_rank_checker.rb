@@ -27,6 +27,4 @@ class GoogleRankChecker
   end
 end
 
-checker = GoogleRankChecker.new
-puts checker.find_rank( ARGV[1], ARGV[0] )
 
