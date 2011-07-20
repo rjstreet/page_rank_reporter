@@ -16,7 +16,7 @@ end
 
 get '/keywords' do
   keywords = get_keywords()
-  keywords.each {|word| puts "::"; puts word }
+  keywords.each {|word| puts word["keyword"] }
 end
 
 def get_keywords
