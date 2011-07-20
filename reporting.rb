@@ -5,6 +5,7 @@ require 'mongo'
 require 'uri'
 require './google_rank_checker'
 require './bing_rank_checker'
+
 TARGET = 'enrichnc.org'
 
 get '/' do
