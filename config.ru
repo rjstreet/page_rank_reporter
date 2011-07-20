@@ -1,3 +1,3 @@
-require 'reporting'
+require './reporting'
 run Sinatra::Application
 
