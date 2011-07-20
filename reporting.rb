@@ -2,6 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'googlecharts'
 require 'mongo'
+require 'uri'
 
 get '/' do
   "Are you supposed to be here?"
@@ -19,8 +20,9 @@ get '/keywords' do
 end
 
 def get_keywords
-  db = Mongo::Connection.new("staff.mongohq.com", 10054).db("app624994")
-  auth = db.authenticate( 'reporter', 'report12max' )
+  uri = URI.parse(ENV['MONGOHQ_URL'])
+  conn = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
+  db = conn.db(uri.path.gsub(/^\//, ''))
   coll = db.collection( "keywords" )
   keywords = Array.new
   coll.find().each {|row| array.add row[keyword]}
