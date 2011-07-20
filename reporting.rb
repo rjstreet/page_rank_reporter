@@ -25,7 +25,7 @@ def get_keywords
   db = conn.db(uri.path.gsub(/^\//, ''))
   coll = db.collection( "keywords" )
   keywords = Array.new
-  coll.find().distinct('keyword').each {|row| keywords << row}
+  coll.distinct('keyword').each {|row| keywords << row}
   keywords
 end
 
