@@ -17,7 +17,7 @@ get '/update_ranks' do
   results = Array.new
   get_keywords().each do | keyword |
     rank = google.find_rank( keyword, TARGET );
-    results["google"]["
+    results["google"][Time.nowstrftime("%m/%d/%Y")] = rank
   end
 end
 
