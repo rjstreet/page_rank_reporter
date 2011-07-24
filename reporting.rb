@@ -25,7 +25,9 @@ get '/charts' do
     bar_data[1] = Array.new
     google_stats.each { |item| bar_data[0] << item[1]}
     bing_stats.each { |item| bar_data[1] << item[1]}
-    return '<p><img src="' + Gchart.bar(:data => bar_data, :bar_colors => 'FF0000,00FF00', :stacked=>'false', :orientation=>'horizontal') + '" title="bar" alt="bar"></p>'
+    labels = Array.new
+    google_stats.each { |item| labels<< item[0]}
+    return '<p><img src="' + Gchart.bar(:data => bar_data, :labels => labels, :bar_colors => 'FF0000,00FF00', :stacked=>'false', :orientation=>'horizontal') + '" title="bar" alt="bar"></p>'
   end
 end
 
