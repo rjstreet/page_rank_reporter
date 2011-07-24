@@ -20,12 +20,12 @@ get '/charts' do
     coll = get_stats_collection
     coll.find( :keyword => keyword, :engine => "google" ).each {| row | google_stats[ row[ "date" ] ] = row[ "rank" ] }
     coll.find( :keyword => keyword, :engine => "bing" ).each {| row | bing_stats[ row[ "date" ] ] = row[ "rank" ] }
-bar_data = Array.new
-bar_data[0] = Array.new
-bar_data[1] = Array.new
-google_stats.each { |item| bar_data[0] << item[1]}
-bing_stats.each { |item| bar_data[1] << item[1]}
-    return Gchart.bar(:data => bar_data, :bar_colors => 'FF0000,00FF00', :stacked=>'false', :orientation=>'horizontal')
+    bar_data = Array.new
+    bar_data[0] = Array.new
+    bar_data[1] = Array.new
+    google_stats.each { |item| bar_data[0] << item[1]}
+    bing_stats.each { |item| bar_data[1] << item[1]}
+    return '<img src=\"' + Gchart.bar(:data => bar_data, :bar_colors => 'FF0000,00FF00', :stacked=>'false', :orientation=>'horizontal') + '\">'
   end
 end
 
