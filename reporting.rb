@@ -23,8 +23,8 @@ get '/charts' do
 bar_data = Array.new
 bar_data[0] = Array.new
 bar_data[1] = Array.new
-google_stats.each { |item| bar_data[0] << item[:date]}
-bing_stats.each { |item| bar_data[1] << item[:date]}
+google_stats.each { |item| bar_data[0] << item}
+bing_stats.each { |item| bar_data[1] << item}
     return Gchart.bar(:data => bar_data, :bar_colors => 'FF0000,00FF00', :stacked=>'false', :orientation=>'horizontal')
   end
 end
