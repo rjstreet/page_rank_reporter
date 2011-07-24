@@ -3,6 +3,7 @@ require 'sinatra'
 require 'googlecharts'
 require 'mongo'
 require 'uri'
+require 'gchart'
 require './google_rank_checker'
 require './bing_rank_checker'
 
@@ -10,6 +11,17 @@ TARGET = 'enrichnc.org'
 
 get '/' do
   "Are you supposed to be here?"
+end
+
+get '/charts' do
+  get_keywords().each do | keyword |
+    google_stats = Array.new
+    bing_stats = Array.new
+    coll = get_stats_collection
+    coll.find( "keyword" => keyword, "engine" => "google" ).each {| row | google_stats[ row["date"] ] = row[ "rank" ] }
+    coll.find( "keyword" => keyword, "engine" => "bing" ).each {| row | bing_stats[ row["date"] ] = row[ "rank" ] }
+    return GChart.bar(:data => [goolge_stats, bing_stats],  :bar_colors => 'FF0000,00FF00', :stacked='false', :orientation='horizontal')
+  end
 end
 
 get '/update_ranks' do
@@ -33,6 +45,7 @@ get '/keywords' do
   keywords.each {|word| output = output + '<li>' + word }
   output = output + '</ul>'
 end
+
 
 def get_keywords
   uri = URI.parse(ENV['MONGOHQ_URL'])
