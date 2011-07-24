@@ -15,8 +15,8 @@ end
 
 get '/charts' do
   get_keywords().each do | keyword |
-    google_stats = Array.new
-    bing_stats = Array.new
+    google_stats = Hash.new
+    bing_stats = Hash.new
     coll = get_stats_collection
     coll.find( "keyword" => keyword, "engine" => "google" ).each {| row | google_stats[ row["date"] ] = row[ "rank" ] }
     coll.find( "keyword" => keyword, "engine" => "bing" ).each {| row | bing_stats[ row["date"] ] = row[ "rank" ] }
