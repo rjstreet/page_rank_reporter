@@ -21,8 +21,8 @@ get '/charts' do
     coll.find( :keyword => keyword, :engine => "google" ).each {| row | google_stats[ row[ "date" ] ] = row[ "rank" ] }
     coll.find( :keyword => keyword, :engine => "bing" ).each {| row | bing_stats[ row[ "date" ] ] = row[ "rank" ] }
 bar_data = Array.new
-bar_data << google_stats;
-bar_data << bing_stats;
+google_stats.each { |item| bar_data[0] << item["date"]}
+bing_stats.each { |item| bar_data[0] << item["date"]}
     return Gchart.bar(:data => bar_data, :bar_colors => 'FF0000,00FF00', :stacked=>'false', :orientation=>'horizontal')
   end
 end
