@@ -3,7 +3,7 @@ require 'sinatra'
 require 'googlecharts'
 require 'mongo'
 require 'uri'
-require 'gchart'
+require 'gruff'
 require './google_rank_checker'
 require './bing_rank_checker'
 
@@ -27,8 +27,16 @@ get '/charts' do
     google_stats.each { |item| bar_data[0] << ( item[1]==-1 ? 0 : item[1] ).to_i }
     bing_stats.each { |item| bar_data[1] << ( item[1]==-1 ? 0 : item[1] ).to_i }
     labels = Array.new
-    google_stats.each { |item| labels<< item[0]}
-    ret_string = ret_string + '<p><b>' + keyword + '</br><img src="' + Gchart.line(:data => bar_data[0], :axis_with_labels => "y", :bar_colors => 'FF1111', :legend => ['Google'], :custom => 'chg=10,15,1,0' ) + '" title="bar" alt="bar"><img src="' + Gchart.line(:data => bar_data[1], :axis_with_labels => "y", :bar_colors => '1111FF', :legend => ['Bing'], :custom => 'chg=10,15,1,0' ) + '" title="bar" alt="bar"></p>'
+
+
+    g = Gruff::Line.new
+    g.title = keyword
+    g.data( "Google", bar_data[0] )
+    g.data( "Bing", bar_data[1] )
+    g.write( keyword + ".png" )
+    ret_string = '<p><b>' + keyword + '</b><br /><img src="' + keyword + '.png" /></p>'
+    #google_stats.each { |item| labels<< item[0]}
+    #ret_string = ret_string + '<p><b>' + keyword + '</br><img src="' + Gchart.line(:data => bar_data[0], :axis_with_labels => "y", :bar_colors => 'FF1111', :legend => ['Google'], :custom => 'chg=10,15,1,0' ) + '" title="bar" alt="bar"><img src="' + Gchart.line(:data => bar_data[1], :axis_with_labels => "y", :bar_colors => '1111FF', :legend => ['Bing'], :custom => 'chg=10,15,1,0' ) + '" title="bar" alt="bar"></p>'
   end
   ret_string
 end
