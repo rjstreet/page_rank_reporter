@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'sinatra'
-require 'googlecharts'
 require 'mongo'
 require 'uri'
 require 'gruff'
