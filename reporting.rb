@@ -26,6 +26,7 @@ get '/charts' do
     bar_data[1] = Array.new
     google_stats.each { |item| bar_data[0] << ( item[1]==-1 ? 0 : item[1] ).to_i }
     bing_stats.each { |item| bar_data[1] << ( item[1]==-1 ? 0 : item[1] ).to_i }
+return bar_data[0]
     labels = Array.new
     google_stats.each { |item| labels<< item[0]}
     ret_string = ret_string + '<p><b>' + keyword + '</br><img src="' + Gchart.line(:data => bar_data[0], :axis_with_labels => "y", :labels => labels, :bar_colors => 'FF1111', :legend => ['Google'], :custom => 'chg=10,15,1,0' ) + 'title="bar" alt="bar"><img src="' + Gchart.line(:data => bar_data[1], :axis_with_labels => "y", :labels => labels, :bar_colors => '1111FF', :legend => ['Bing'], :custom => 'chg=10,15,1,0' ) + '" title="bar" alt="bar"></p>'
