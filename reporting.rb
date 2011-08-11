@@ -33,8 +33,8 @@ get '/charts' do
       g.title = keyword
       g.add :line, 'Google', bar_data[0] 
       g.add :line, 'Bing', bar_data[1] 
-      g.render :to => (keyword + '.png') :as => 'PNG'
-      g.render :width => 300, :height => 200, :to => ( keyword + '.png' ), :as => 'png'
+      #g.render :to => (keyword + '.png') :as => 'PNG'
+      g.render :to => (keyword + 'png'), :width => 300, :height => 200, :to => ( keyword + '.png' ), :as => 'png'
       #g.write( keyword + '.png' )
       #ret_string = ret_string + '<p><b>' + keyword + '</b><br /><img src = "' + keyword + '.png" /></p>'
       send_file file, :type => 'image/png', :disposition => 'inline'
