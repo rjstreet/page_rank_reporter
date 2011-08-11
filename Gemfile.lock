@@ -2,6 +2,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     bson (1.3.1)
+    builder (2.1.2)
     hpricot (0.8.4)
     mongo (1.3.1)
       bson (>= 1.3.1)
@@ -20,6 +21,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  builder
   hpricot
   mongo
   scruffy (= 0.2.6)
