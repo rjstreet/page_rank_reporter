@@ -4,5 +4,5 @@ gem 'sinatra', '1.2'
 gem 'slim'
 gem 'hpricot'
 gem 'mongo'
-gem 'scruffy'
+gem 'scruffy', '0.2.6'
 
