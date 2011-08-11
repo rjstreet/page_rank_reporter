@@ -28,7 +28,7 @@ get '/charts' do
     labels = Array.new
 
     google_stats.each { |item| labels<< item[0]}
-      g = Gruff.Line.new
+      g = Gruff::Line.new
       g.title = keyword
       g.data( 'Google', bar_data[0] ) 
       g.data( 'Bing', bar_data[1] )
