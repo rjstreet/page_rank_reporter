@@ -5,5 +5,5 @@ gem 'slim'
 gem 'hpricot'
 gem 'mongo'
 gem 'googlecharts'
-gem 'gruff'
+gem 'scruffy'
 
