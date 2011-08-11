@@ -16,7 +16,7 @@ end
 get '/charts' do
   ret_string = '';
   get_keywords().each do | keyword |
-    ret_string = ret_string + '<p><b>' + keyword + '</b><br /><img src = /chart_image/"' + keyword '" /></p>'
+    ret_string = ret_string + '<p><b>' + keyword + '</b><br /><img src = "\/chart_image\/' + keyword '" /></p>'
   end
   ret_string
 end
