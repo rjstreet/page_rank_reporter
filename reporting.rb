@@ -20,7 +20,7 @@ get '/charts' do
   ret_string
 end
 
-get '/chart_image/:keyword' do
+get '/chart_image/:keyword' do |keyword|
   content_type 'image/png'
   google_stats = Hash.new
   bing_stats = Hash.new
