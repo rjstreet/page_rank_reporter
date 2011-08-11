@@ -2,6 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'mongo'
 require 'gruff'
+require 'rmagick'
 require 'uri'
 require './google_rank_checker'
 require './bing_rank_checker'
@@ -15,27 +16,31 @@ end
 get '/charts' do
   ret_string = '';
   get_keywords().each do | keyword |
-    google_stats = Hash.new
-    bing_stats = Hash.new
-    coll = get_stats_collection
-    coll.find( :keyword => keyword, :engine => "google" ).each {| row | google_stats[ row[ "date" ] ] = row[ "rank" ] }
-    coll.find( :keyword => keyword, :engine => "bing" ).each {| row | bing_stats[ row[ "date" ] ] = row[ "rank" ] }
-    bar_data = Array.new
-    bar_data[0] = Array.new
-    bar_data[1] = Array.new
-    google_stats.each { |item| bar_data[0] << ( item[1]==-1 ? 0 : item[1] ).to_i }
-    bing_stats.each { |item| bar_data[1] << ( item[1]==-1 ? 0 : item[1] ).to_i }
-    labels = Array.new
-
-    google_stats.each { |item| labels<< item[0]}
-      g = Gruff::Line.new
-      g.title = keyword
-      g.data( 'Google', bar_data[0] ) 
-      g.data( 'Bing', bar_data[1] )
-      ret_string = ret_string + '<p><b>' + keyword + '</b><br /><img src = "' + keyword + '.png" /></p>'
-      send_data( g.to_blob, :type => 'image/svg', :disposition => 'inline' )
-    end
+    ret_string = ret_string + '<p><b>' + keyword + '</b><br /><img src = /chart_image/"' + keyword '" /></p>'
+  end
   ret_string
+end
+
+get '/chart_image/:keyword' do
+  content_type 'image/png'
+  google_stats = Hash.new
+  bing_stats = Hash.new
+  coll = get_stats_collection
+  coll.find( :keyword => keyword, :engine => "google" ).each {| row | google_stats[ row[ "date" ] ] = row[ "rank" ] }
+  coll.find( :keyword => keyword, :engine => "bing" ).each {| row | bing_stats[ row[ "date" ] ] = row[ "rank" ] }
+  bar_data = Array.new
+  bar_data[0] = Array.new
+  bar_data[1] = Array.new
+  google_stats.each { |item| bar_data[0] << ( item[1]==-1 ? 0 : item[1] ).to_i }
+  bing_stats.each { |item| bar_data[1] << ( item[1]==-1 ? 0 : item[1] ).to_i }
+  labels = Array.new
+
+  google_stats.each { |item| labels<< item[0]}
+  g = Gruff::Line.new
+  g.title = keyword
+  g.data( 'Google', bar_data[0] )    
+  g.data( 'Bing', bar_data[1] )   
+  g.to_blob
 end
 
 get '/update_ranks' do
