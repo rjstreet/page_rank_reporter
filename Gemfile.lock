@@ -16,6 +16,7 @@ GEM
       tilt (~> 1.2)
     temple (0.3.2)
     tilt (1.2.2)
+    rmagick (2.13.1)
 
 PLATFORMS
   ruby
