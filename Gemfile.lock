@@ -29,3 +29,4 @@ DEPENDENCIES
   slim
   tilt (= 1.2.2)
   rmagick
+  gruff
