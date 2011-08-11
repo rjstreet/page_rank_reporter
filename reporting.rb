@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'mongo'
-require 'scruffy'
+require 'gruff'
 require 'uri'
 require './google_rank_checker'
 require './bing_rank_checker'
@@ -28,16 +28,12 @@ get '/charts' do
     labels = Array.new
 
     google_stats.each { |item| labels<< item[0]}
-      g = Scruffy::Graph.new
-      g.renderer = Scruffy::Renderers::Standard.new
+      g = Gruff.Line.new
       g.title = keyword
-      g.add :line, 'Google', bar_data[0] 
-      g.add :line, 'Bing', bar_data[1] 
-      #g.render :to => (keyword + '.png') :as => 'PNG'
-      g.render :width => 300, :height => 200, :to => ( keyword + '.svg' )
-      #g.write( keyword + '.png' )
-      #ret_string = ret_string + '<p><b>' + keyword + '</b><br /><img src = "' + keyword + '.png" /></p>'
-      send_file (keyword + '.svg'), :type => 'image/svg', :disposition => 'inline'
+      g.data( 'Google', bar_data[0] ) 
+      g.data( 'Bing', bar_data[1] )
+      ret_string = ret_string + '<p><b>' + keyword + '</b><br /><img src = "' + keyword + '.png" /></p>'
+      send_data( g.to_blob, :type => 'image/svg', :disposition => 'inline' )
     end
   ret_string
 end
