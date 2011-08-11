@@ -25,7 +25,6 @@ DEPENDENCIES
   builder
   hpricot
   mongo
-  scruffy (= 0.3.6)
   sinatra (= 1.2)
   slim
   tilt (= 1.2.2)
