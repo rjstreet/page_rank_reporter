@@ -22,7 +22,7 @@ PLATFORMS
 DEPENDENCIES
   hpricot
   mongo
-  scruffy
+  scruffy (= 0.2.6)
   sinatra (= 1.2)
   slim
   tilt (= 1.2.2)
