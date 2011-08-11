@@ -36,7 +36,7 @@ get '/chart_image/:keyword' do |keyword|
 
   google_stats.each { |item| labels<< item[0]}
   g = Gruff::Line.new(400)
-  g.theme = theme_keynote()
+  g.theme_keynote()
   g.title = keyword
   g.data( 'Google', bar_data[0] )    
   g.data( 'Bing', bar_data[1] )   
