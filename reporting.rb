@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'mongo'
+require 'scruffy'
 require 'uri'
 require './google_rank_checker'
 require './bing_rank_checker'
